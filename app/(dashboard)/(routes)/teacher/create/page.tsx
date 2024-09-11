@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   title: z.string().min(5, {
@@ -28,9 +29,16 @@ const CreatePage = () => {
   });
   const { isSubmitting, isValid } = form.formState;
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      console.log(values);
+      toast.success("Course created successfully");
+    } catch (error: any) {
+      toast.error("Failed to create course", {
+        description: error.message,
+      });
+    }
+  };
   return (
     <div className="max-w-5xl  mx-auto h-full flex flex-col items-center p-5 md:p-0">
       <div className="my-4">
