@@ -6,4 +6,8 @@ export const mainMiddleware = () => {
   return res;
 };
 
-export default authMiddleware(mainMiddleware, ["/", "/sign-in", "/sign-up"]);
+export default authMiddleware(mainMiddleware, [
+  "/sign-in",
+  "/sign-up",
+  "/search",
+]);
