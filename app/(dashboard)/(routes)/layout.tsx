@@ -1,5 +1,4 @@
 "use client";
-import { UserButton } from "@clerk/nextjs";
 import Navbar from "../_components/navbar";
 import Sidebar from "../_components/sidebar";
 const DahsboardLayout = ({ children }: { children: React.ReactNode }) => {

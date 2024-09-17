@@ -10,4 +10,5 @@ export default authMiddleware(mainMiddleware, [
   "/sign-in",
   "/sign-up",
   "/search",
+  "/courses/[courseId]",
 ]);

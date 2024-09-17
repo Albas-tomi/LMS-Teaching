@@ -16,7 +16,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { toast } from "sonner";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
+// validation
 const formSchema = z.object({
   title: z.string().min(5, {
     message: "Title must be at least 2 characters.",
@@ -24,23 +27,33 @@ const formSchema = z.object({
 });
 
 const CreatePage = () => {
+  // to descript the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
+
+  // to submit status
   const { isSubmitting, isValid } = form.formState;
+
+  const router = useRouter();
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      console.log(values);
-      toast.success("Course created successfully");
+      const result = await axios.post("/api/courses", values);
+      if (result.status === 200) {
+        toast.success("Course created successfully");
+
+        router.push(`/teacher/course/${result.data.id}`);
+      }
     } catch (error: any) {
       toast.error("Failed to create course", {
         description: error.message,
       });
     }
   };
+
   return (
-    <div className="max-w-5xl  mx-auto h-full flex flex-col items-center p-5 md:p-0">
+    <div className="max-w-5xl md:my-auto mx-auto h-full flex flex-col items-center p-5 md:p-0">
       <div className="my-4">
         <h1 className="text-xl font-semibold">Create Course</h1>
       </div>

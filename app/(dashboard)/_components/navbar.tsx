@@ -46,7 +46,7 @@ const Navbar = () => {
 
         {/* USER BUTTON */}
         <div className="ml-auto bg-slate-100 rounded-full p-2 flex items-center justify-center">
-          <UserButton afterSwitchSessionUrl="/" />
+          {<UserButton afterSwitchSessionUrl="/" /> || <></>}
         </div>
         {/* USER BUTTON */}
       </div>
